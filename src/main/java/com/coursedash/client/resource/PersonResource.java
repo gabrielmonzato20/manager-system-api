@@ -77,4 +77,8 @@ public ResponseEntity<Person> updateByid(@PathVariable Long id,
 
 
 }
+@PutMapping("/{id}/active")
+public void setActive(@PathVariable long id , @RequestBody Boolean active){
+    personService.updateStatus(id,active);
+}
 }

@@ -3,6 +3,7 @@ package com.coursedash.client.exceptionHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -33,7 +34,7 @@ public class MoneyExceptionHandler extends ResponseEntityExceptionHandler {
             "mensagem.invalid", 
             null,
             LocaleContextHolder.getLocale());
-        String msgDev = ex.getCause().toString();
+        String msgDev = Optional.ofNullable(ex.getCause()).orElse(ex).toString();
         List<Error> errors = Arrays.asList(new Error(msgUser,msgDev));
         return handleExceptionInternal(ex,
         errors,
