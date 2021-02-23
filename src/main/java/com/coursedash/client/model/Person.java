@@ -1,5 +1,7 @@
 package com.coursedash.client.model;
 
+import java.beans.Transient;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "person")
@@ -56,6 +60,15 @@ public class Person {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    @JsonIgnore
+    @Transient
+	public boolean isInactive() {
+		return !this.getActive();
+	}
+
+
+    
 
 }
 

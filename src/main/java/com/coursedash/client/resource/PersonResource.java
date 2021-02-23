@@ -60,7 +60,7 @@ public ResponseEntity<Person> save(@Valid @RequestBody Person person,HttpServlet
 
 @GetMapping("/{id}")
 public ResponseEntity<Object> getById(@PathVariable("id") Long id){
-    Optional<Person> person = personRepository.findById(id);
+    Optional<Person> person = personService.findById(id);
     return person.isPresent() ? ResponseEntity.ok(person):ResponseEntity.notFound().build(); 
 }
 @DeleteMapping("/{id}")

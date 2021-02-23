@@ -1,5 +1,7 @@
 package com.coursedash.client.service;
 
+import java.util.Optional;
+
 import com.coursedash.client.model.Person;
 import com.coursedash.client.repository.PersonRepository;
 
@@ -24,6 +26,11 @@ public class PersonService {
         Person personsave = personRepository.findById(id).orElseThrow(
             () -> new EmptyResultDataAccessException(1));
         return personsave;
+    }
+
+    public Optional<Person> findById(Long id){ 
+        Optional<Person> person = personRepository.findById(id);
+        return person;
     }
 
 	public void updateStatus(long id, Boolean active) {
