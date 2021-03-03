@@ -1,6 +1,7 @@
 package com.coursedash.client.cors;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -15,10 +16,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.coursedash.client.propreties.ApiProperties;
+
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
-private String origAlow = "";
+    @Autowired
+    private ApiProperties apiProperties;
+private String origAlow = apiProperties.getOrigin();
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {

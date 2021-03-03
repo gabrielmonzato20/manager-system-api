@@ -8,6 +8,11 @@ public class ApiProperties {
 
     private final Security security = new Security();
 
+    private String origin="";
+
+    public String getOrigin() {
+        return this.origin;
+    }
 
 
 
