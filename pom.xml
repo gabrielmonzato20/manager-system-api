@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.coursedash</groupId>
-	<artifactId>client</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>client</name>
+	<artifactId>moneyapi</artifactId>
+	<version>1.0</version>
+	<name>moneyapi</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
