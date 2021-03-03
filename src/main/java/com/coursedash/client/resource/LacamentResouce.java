@@ -12,6 +12,7 @@ import com.coursedash.client.exception.PersonInactiveorNotFoundException;
 import com.coursedash.client.exceptionHandler.MoneyExceptionHandler.Error;
 import com.coursedash.client.model.Lancament;
 import com.coursedash.client.repository.filter.LacamentFilter;
+import com.coursedash.client.repository.projection.ResumeLancament;
 import com.coursedash.client.service.LancamentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,11 +46,18 @@ private ApplicationEventPublisher event;
 private MessageSource messageSource;
 
 @GetMapping
+@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')  #oauth2.hasScope('read')")
 public Page<Lancament>getLacament(LacamentFilter lacamentFilter,Pageable pageable){
     return lancamentService.getAllLancament(lacamentFilter,pageable);
 }
 
+@GetMapping(params = "resume")
+@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')  #oauth2.hasScope('read')")
+public Page<ResumeLancament>getLacamentResume(LacamentFilter lacamentFilter,Pageable pageable){
+    return lancamentService.getAllLancamentResume(lacamentFilter,pageable);
+}
 @PostMapping
+@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO')  #oauth2.hasScope('write')")
 public ResponseEntity<Lancament> createLacament(@Valid @RequestBody Lancament lancament, HttpServletResponse response){
     Lancament lancamentSave = lancamentService.save(lancament);
     
@@ -57,10 +66,12 @@ public ResponseEntity<Lancament> createLacament(@Valid @RequestBody Lancament la
 
 }
 @GetMapping("/{id}")
+@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')  #oauth2.hasScope('read')")
 public ResponseEntity<Lancament> getById(@PathVariable Long id) throws Exception {
     return ResponseEntity.ok( lancamentService.getbyId(id));
 }
 @DeleteMapping("/{id}")
+@PreAuthorize("hasAuthority('ROLE_REMOVER_LANCAMENTO')  #oauth2.hasScope('write')")
 @ResponseStatus(HttpStatus.NO_CONTENT)
 public void deleteById(@PathVariable Long id){
     lancamentService.deleteById(id);

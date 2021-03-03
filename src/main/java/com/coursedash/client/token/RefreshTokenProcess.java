@@ -4,6 +4,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.coursedash.client.propreties.ApiProperties;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -18,7 +21,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @ControllerAdvice
 public class RefreshTokenProcess implements ResponseBodyAdvice<OAuth2AccessToken> {
+    @Autowired
+    private ApiProperties apiProperties;
 
+    
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         // TODO Auto-generated method stub
@@ -49,7 +55,7 @@ public class RefreshTokenProcess implements ResponseBodyAdvice<OAuth2AccessToken
     HttpServletRequest req, HttpServletResponse resp) {
     Cookie refrashToken = new Cookie("refreshToken",refreshToken);
     refrashToken.setHttpOnly(true);
-    refrashToken.setSecure(false);
+    refrashToken.setSecure(apiProperties.getSecurity().isEnableHttps());
     refrashToken.setPath(req.getContextPath()+"/oauth/token");
     refrashToken.setMaxAge(2592000);
     resp.addCookie(refrashToken);

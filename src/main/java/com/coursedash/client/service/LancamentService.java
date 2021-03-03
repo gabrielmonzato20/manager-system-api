@@ -2,6 +2,7 @@ package com.coursedash.client.service;
 
 import com.coursedash.client.repository.LancamentRepository;
 import com.coursedash.client.repository.filter.LacamentFilter;
+import com.coursedash.client.repository.projection.ResumeLancament;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,10 @@ private PersonService personService;
 public Page<Lancament> getAllLancament(LacamentFilter lacamentFilter,Pageable pageable){
 
     return lancamentRepository.filter(lacamentFilter,pageable);
+}
+public Page<ResumeLancament> getAllLancamentResume(LacamentFilter lacamentFilter,Pageable pageable){
+
+    return lancamentRepository.resume(lacamentFilter,pageable);
 }
 public void deleteById(Long id){
 	lancamentRepository.deleteById(id);
