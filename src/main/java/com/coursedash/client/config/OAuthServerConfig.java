@@ -8,17 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
-@EnableWebSecurity
-public class OAuthServerConfig extends WebSecurityConfigurerAdapter {
+public class OAuthServerConfig  {
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManager() throws Exception{ 
-        return super.authenticationManager();
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
-    }
 }

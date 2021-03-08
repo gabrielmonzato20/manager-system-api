@@ -44,14 +44,14 @@ public class CategoryResource {
     }
     @PostMapping
     //@ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA')  #oauth2.hasScope('write')")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and #oauth2.hasScope('write')")
     public ResponseEntity<Category> save(@Valid @RequestBody Category category,HttpServletResponse response){
         Category categorySave = categoryRepository.save(category);
         event.publishEvent(new EventCreatead(this, response, category.getId()));
         return     ResponseEntity.status(HttpStatus.CREATED).body(categorySave);
 }
 @GetMapping("/{id}")
-@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA')  #oauth2.hasScope('read')")
+@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')")
 ResponseEntity<Category> findByid(@PathVariable Long id){
     Optional<Category> category = categoryRepository.findById(id);
     return category.isPresent() ? ResponseEntity.ok(category.get()) :  ResponseEntity.notFound().build();

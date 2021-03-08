@@ -1,10 +1,10 @@
-package com.coursedash.client.propreties;
+package com.coursedash.client.config.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 @ConfigurationProperties("client")
 public class ApiProperties {
+
 
     private final Security security = new Security();
 
@@ -13,7 +13,9 @@ public class ApiProperties {
     public String getOrigin() {
         return this.origin;
     }
-
+    public void setOrigin(String origin){ 
+        this.origin = origin; 
+    }
 
 
     public static class Security{ 
@@ -25,7 +27,9 @@ public class ApiProperties {
             return this.enableHttps;
         }
 
-
+        public void setEnableHttps(Boolean enable) {
+             this.enableHttps = enable;
+        }
 
     
     
@@ -36,4 +40,5 @@ public class ApiProperties {
         return this.security;
     }
     
+
 }

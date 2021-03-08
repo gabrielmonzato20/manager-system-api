@@ -2,6 +2,7 @@ package com.coursedash.client.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -10,18 +11,17 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name="USER")
 @Table(name = "USER")
 public class User {
     @Id
+    @Column(name="ID")
     private Long id;
-
-
-
+    @Column(name="USERNAME")
     private String name;
-
+    @Column(name="EMAIL")
     private String email;
-
+    @Column(name="USERPASSWORD")
     private String passworld;
 
     @ManyToMany(fetch = FetchType.EAGER)

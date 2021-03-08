@@ -43,7 +43,7 @@ public class PersonResource {
     private PersonService personService ;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')  #oauth2.hasScope('read')")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
     public ResponseEntity<?> findAll(){
     List<Person> persons = personRepository.findAll();
     return  new ResponseEntity<List<Person>>(persons, HttpStatus.OK);
@@ -52,7 +52,7 @@ public class PersonResource {
 }
 
 @PostMapping
-@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')  #oauth2.hasScope('read')")
+@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
 public ResponseEntity<Person> save(@Valid @RequestBody Person person,HttpServletResponse  response){
     Person savedPerson = personRepository.save(person);
    event.publishEvent(new EventCreatead(this, response, person.getId()));
@@ -62,21 +62,21 @@ public ResponseEntity<Person> save(@Valid @RequestBody Person person,HttpServlet
 }
 
 @GetMapping("/{id}")
-@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')  #oauth2.hasScope('read')")
+@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
 public ResponseEntity<Object> getById(@PathVariable("id") Long id){
     Optional<Person> person = personService.findById(id);
     return person.isPresent() ? ResponseEntity.ok(person):ResponseEntity.notFound().build(); 
 }
 
 @DeleteMapping("/{id}")
-@PreAuthorize("hasAuthority('ROLE_REMOVER_PESSOA')  #oauth2.hasScope('write')")
+@PreAuthorize("hasAuthority('ROLE_REMOVER_PESSOA') and #oauth2.hasScope('write')")
 @ResponseStatus(HttpStatus.NO_CONTENT)
 public void deleteById(@PathVariable("id") Long id){
     personRepository.deleteById(id);
 
 }
 @PutMapping("/{id}")
-@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA')  #oauth2.hasScope('write')")
+@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
 public ResponseEntity<Person> updateByid(@PathVariable Long id,
 @Valid @RequestBody Person person){
 
@@ -85,7 +85,7 @@ public ResponseEntity<Person> updateByid(@PathVariable Long id,
 
 }
 @PutMapping("/{id}/active")
-@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA')  #oauth2.hasScope('write')")
+@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and  #oauth2.hasScope('write')")
 public void setActive(@PathVariable long id , @RequestBody Boolean active){
     personService.updateStatus(id,active);
 }

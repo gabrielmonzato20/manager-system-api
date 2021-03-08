@@ -46,18 +46,18 @@ private ApplicationEventPublisher event;
 private MessageSource messageSource;
 
 @GetMapping
-@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')  #oauth2.hasScope('read')")
+@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
 public Page<Lancament>getLacament(LacamentFilter lacamentFilter,Pageable pageable){
     return lancamentService.getAllLancament(lacamentFilter,pageable);
 }
 
 @GetMapping(params = "resume")
-@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')  #oauth2.hasScope('read')")
+@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
 public Page<ResumeLancament>getLacamentResume(LacamentFilter lacamentFilter,Pageable pageable){
     return lancamentService.getAllLancamentResume(lacamentFilter,pageable);
 }
 @PostMapping
-@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO')  #oauth2.hasScope('write')")
+@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO') and #oauth2.hasScope('write')")
 public ResponseEntity<Lancament> createLacament(@Valid @RequestBody Lancament lancament, HttpServletResponse response){
     Lancament lancamentSave = lancamentService.save(lancament);
     
@@ -66,12 +66,12 @@ public ResponseEntity<Lancament> createLacament(@Valid @RequestBody Lancament la
 
 }
 @GetMapping("/{id}")
-@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')  #oauth2.hasScope('read')")
+@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
 public ResponseEntity<Lancament> getById(@PathVariable Long id) throws Exception {
     return ResponseEntity.ok( lancamentService.getbyId(id));
 }
 @DeleteMapping("/{id}")
-@PreAuthorize("hasAuthority('ROLE_REMOVER_LANCAMENTO')  #oauth2.hasScope('write')")
+@PreAuthorize("hasAuthority('ROLE_REMOVER_LANCAMENTO') and #oauth2.hasScope('write')")
 @ResponseStatus(HttpStatus.NO_CONTENT)
 public void deleteById(@PathVariable Long id){
     lancamentService.deleteById(id);

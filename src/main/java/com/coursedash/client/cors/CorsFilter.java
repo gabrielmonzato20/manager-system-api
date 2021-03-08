@@ -16,24 +16,25 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.coursedash.client.propreties.ApiProperties;
+import com.coursedash.client.config.property.ApiProperties;
+
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
     @Autowired
     private ApiProperties apiProperties;
-private String origAlow = apiProperties.getOrigin();
+    
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
             HttpServletRequest req  = (HttpServletRequest) request;
             HttpServletResponse resp = (HttpServletResponse) response;
-            resp.setHeader("Acess-Control-Allow-Origin", origAlow);
+            resp.setHeader("Acess-Control-Allow-Origin", apiProperties.getOrigin());
             resp.setHeader("Acess-Control-Allow-Credentials", Boolean.TRUE.toString());
             if("OPTIONS".equals(req.getMethod()) && 
-            origAlow.equals(req.getHeader("Origin"))){
+            apiProperties.getOrigin().equals(req.getHeader("Origin"))){
                 resp.setHeader("Acess-Control-Allow-Methods", 
                 "POST,GET,OPTIONS,DELETE,PUT,PATCH");
                 resp.setHeader("Acess-Control-Allow-Headers", "Authorization,Content-Type,Accept");
