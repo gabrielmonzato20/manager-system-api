@@ -30,7 +30,7 @@ public class ApiProperties {
         public void setEnableHttps(Boolean enable) {
              this.enableHttps = enable;
         }
-
+        
     
     
     }
