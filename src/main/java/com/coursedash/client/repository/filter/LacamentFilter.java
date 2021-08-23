@@ -6,9 +6,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class LacamentFilter {
     private String describe;
-    @DateTimeFormat(pattern = "yyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataVencFrom;
-    @DateTimeFormat(pattern = "yyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataVencAt;
 
     public String getDescribe() {

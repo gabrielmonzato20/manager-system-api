@@ -1,13 +1,14 @@
 package com.coursedash.client.repository.projection;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.coursedash.client.enumerate.TypeLancament;
 
 public class ResumeLancament {
 
-    public ResumeLancament(Long id, String desc, LocalDateTime datevenc, LocalDateTime datepay, BigDecimal value, TypeLancament type, String category, String person) {
+    public ResumeLancament(Long id, String desc, LocalDate datevenc, LocalDate datepay, BigDecimal value, TypeLancament type, String category, String person) {
         this.id = id;
         this.desc = desc;
         this.datevenc = datevenc;
@@ -20,8 +21,8 @@ public class ResumeLancament {
 
     private Long id;
     private String desc;
-    private LocalDateTime datevenc;
-    private LocalDateTime datepay;
+    private LocalDate datevenc;
+    private LocalDate datepay;
     private BigDecimal value;
     private TypeLancament type;
     private String category;
@@ -43,19 +44,19 @@ public class ResumeLancament {
         this.desc = desc;
     }
 
-    public LocalDateTime getDatevenc() {
+    public LocalDate getDatevenc() {
         return this.datevenc;
     }
 
-    public void setDatevenc(LocalDateTime datevenc) {
+    public void setDatevenc(LocalDate datevenc) {
         this.datevenc = datevenc;
     }
 
-    public LocalDateTime getDatepay() {
+    public LocalDate getDatepay() {
         return this.datepay;
     }
 
-    public void setDatepay(LocalDateTime datepay) {
+    public void setDatepay(LocalDate datepay) {
         this.datepay = datepay;
     }
 

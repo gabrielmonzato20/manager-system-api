@@ -74,10 +74,10 @@ public class LancamentRepositoryImpl implements LancamentRepositoryQuery {
                     "%" + lacamentFilter.getDescribe().toLowerCase() + "%"));
         }
         if (lacamentFilter.getDataVencAt() != null) {
-            predicates.add(builder.greaterThan(root.get(Lancament_.dataVencimento), lacamentFilter.getDataVencAt()));
+            predicates.add(builder.greaterThanOrEqualTo(root.get(Lancament_.dataVencimento), lacamentFilter.getDataVencAt()));
         }
         if (lacamentFilter.getDataVencFrom() != null) {
-            predicates.add(builder.lessThan(root.get(Lancament_.dataVencimento), lacamentFilter.getDataVencFrom()));
+            predicates.add(builder.lessThanOrEqualTo(root.get(Lancament_.dataVencimento), lacamentFilter.getDataVencFrom()));
         }
         return predicates.toArray(new Predicate[predicates.size()]);
 
