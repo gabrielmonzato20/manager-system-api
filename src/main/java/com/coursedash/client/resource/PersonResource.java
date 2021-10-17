@@ -27,7 +27,7 @@ import org.springframework.web.util.UriBuilderFactory;
 
 @RestController
 @RequestMapping("/persons")
-public class PersonResource {
+public class    PersonResource {
    
     @Autowired
     private PersonRepository personRepository ;

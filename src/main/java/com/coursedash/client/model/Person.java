@@ -25,7 +25,7 @@ public class Person {
     @Embedded
     private Adress adress;
     @NotNull
-    private Boolean active;
+    private Boolean active = true;
 
     public Long getId() {
         return this.id;

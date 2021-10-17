@@ -1,5 +1,6 @@
 package com.coursedash.client.service;
 
+import com.coursedash.client.exception.LacamentPresentException;
 import com.coursedash.client.repository.LancamentRepository;
 import com.coursedash.client.repository.filter.LacamentFilter;
 import com.coursedash.client.repository.projection.ResumeLancament;
@@ -49,7 +50,20 @@ public Lancament save(Lancament lancament) {
 	return lancamentRepository.save(lancament);
 }
 
-public Lancament getbyId(Long id) throws Exception {
+public Lancament update(Lancament lancament) {
+	Person person = personService.findById(lancament.getPessoa().getId()).get();
+	if(person.isInactive()){
+		throw new PersonInactiveorNotFoundException();
+
+	}
+	Lancament lancamentDb = lancamentRepository.findById(lancament.getCodigo()).orElseThrow(() ->new LacamentPresentException());
+	if(!lancamentDb.equals(lancament)){
+		lancamentRepository.save(lancament);
+	}
+	return lancament;
+}
+
+	public Lancament getbyId(Long id) throws Exception {
 	return  lancamentRepository.findById(id).orElseThrow(()->new Exception("Lancament not found "));
 }
     
