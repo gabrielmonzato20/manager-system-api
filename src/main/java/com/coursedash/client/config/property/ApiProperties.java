@@ -1,8 +1,10 @@
 package com.coursedash.client.config.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 @ConfigurationProperties("client")
+@Component
 public class ApiProperties {
 
 
