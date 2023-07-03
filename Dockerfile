@@ -5,7 +5,7 @@ FROM openjdk:8-jdk-alpine
 WORKDIR /app
 
 # Copy the application JAR file to the container
-COPY target/your-application.jar app.jar
+COPY target/moneyapi-1.0.jar app.jar
 
 # Set the environment variables for MySQL database connection
 ENV DB_HOST=db-mysql-nyc1-85609-do-user-4849540-0.b.db.ondigitalocean.com
