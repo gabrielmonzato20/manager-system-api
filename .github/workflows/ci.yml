@@ -34,4 +34,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push Docker image to Docker Hub
-        run: docker push your-dockerhub-username/your-image-name
+        run: docker push gabrielmonzato20/systemmanager:latest
