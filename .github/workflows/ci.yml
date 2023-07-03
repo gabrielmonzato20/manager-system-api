@@ -1,4 +1,6 @@
 name: Build and Push to Docker Hub
+build:
+ runs-on: ubuntu-latest
 on:
   push:
     branches:
