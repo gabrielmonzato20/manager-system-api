@@ -27,7 +27,7 @@ jobs:
         run: mvn package --batch-mode
 
       - name: Build Docker image
-        run: docker build -t gabrielmonzato20/systemmanager:latest .
+        run: docker build -t gabrielmonzato/systemmanager:latest .
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -36,4 +36,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push Docker image to Docker Hub
-        run: docker push gabrielmonzato20/systemmanager:latest
+        run: docker push gabrielmonzato/systemmanager:latest
