@@ -52,3 +52,5 @@
         pull: yes
       environment:
         DOCKER_IMAGE: "{{ DOCKER_IMAGE }}"
+  vars:
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
