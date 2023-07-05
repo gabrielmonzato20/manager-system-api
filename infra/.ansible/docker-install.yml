@@ -63,7 +63,7 @@
         executable: pip3
     - name: Run Docker Compose
       docker_compose:
-        project_src: "{{ project_src }}"
+        project_src: "{{ ansible_env.docker_compose_path }}"
         state: present
         build: no
         pull: yes
