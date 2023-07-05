@@ -44,11 +44,16 @@
         name: "{{ DOCKER_IMAGE }}"
         source: pull
 
+    - name: Install pip package manager
+      become: true
+      package:
+        name: python3-pip
+        state: present
     - name: Install docker Python library
       pip:
         name: docker
         state: present
-        
+        executable: pip3
     - name: Run Docker Compose
       docker_compose:
         project_src: "{{ project_src }}"
