@@ -37,3 +37,13 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: docker push gabrielmonzato/systemmanager:latest
+
+      - name: Install Ansible
+        run: pip install ansible
+
+      - name: Run Ansible playbook
+        env:
+          DOCKER_IMAGE: gabrielmonzato/systemmanager:latest
+        run: |
+          echo "project_src: ${{ github.workspace }}/infra/docker/docker-compose.yml" > ansible_vars.yml
+          ansible-playbook  -i  ${{ github.workspace }}/infra/.ansible/servers.ini  ${{ github.workspace }}/infra/.ansible/docker_install.yml --extra-vars "DOCKER_IMAGE=${DOCKER_IMAGE}" --extra-vars "@ansible_vars.yml"    
