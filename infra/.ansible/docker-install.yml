@@ -39,6 +39,13 @@
         group: root
         mode: 'u+x,g+x,o+x'
       become: true
+
+    - name: Install docker-compose
+      pip:
+        name: docker-compose
+        state: present
+        executable: pip3
+
     - name: Pull Docker image
       docker_image:
         name: "{{ DOCKER_IMAGE }}"
