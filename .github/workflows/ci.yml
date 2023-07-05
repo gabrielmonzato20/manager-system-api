@@ -39,7 +39,7 @@ jobs:
         run: docker push gabrielmonzato/systemmanager:latest
 
       - name: Run Ansible playbook
-        uses: generic-github-action/ansible@v1
+        uses: ansible/ansible-runner-action
         with:
           playbook: infra/.ansible/docker-install.yml
           args: -i  infra/.ansible/servers.ini
