@@ -46,4 +46,4 @@ jobs:
 
         run: |
           echo "project_src: infra/docker/docker-compose.yml" > ansible_vars.yml
-          ansible-playbook  -i  infra/.ansible/servers.ini  infra/.ansible/docker-install.yml --extra-vars "DOCKER_IMAGE=${DOCKER_IMAGE}" --extra-vars "DOCKERFILE_SRC_NET=${DOCKER_SRC_NET}" --extra-vars "DOCKERFILE_SRC=${DOCKERFILE_SRC}" --extra-vars "@ansible_vars.yml"
+          ansible-playbook  -i  infra/.ansible/servers.ini  infra/.ansible/docker-install.yml --extra-vars "DOCKER_IMAGE=${DOCKER_IMAGE}" --extra-vars "DOCKERFILE_SRC_NET=${DOCKERFILE_SRC_NET}" --extra-vars "DOCKERFILE_SRC=${DOCKERFILE_SRC}" --extra-vars "@ansible_vars.yml"
