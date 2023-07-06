@@ -41,7 +41,7 @@ jobs:
       - name: Run Ansible playbook
         env:
           DOCKER_IMAGE: gabrielmonzato/systemmanager:latest
-          DOCKERFILE_SRC: infra/docker/docker-compose.yml
+          DOCKERFILE_SRC: ${{ github.workspace }}/infra/docker/docker-compose.yml
         run: |
           echo "project_src: infra/docker/docker-compose.yml" > ansible_vars.yml
           ansible-playbook  -i  infra/.ansible/servers.ini  infra/.ansible/docker-install.yml --extra-vars "DOCKER_IMAGE=${DOCKER_IMAGE}" --extra-vars "DOCKERFILE_SRC=${DOCKERFILE_SRC}" --extra-vars "@ansible_vars.yml"
