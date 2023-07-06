@@ -61,9 +61,16 @@
         name: docker
         state: present
         executable: pip3
+  
+    - name: Copy file from GitHub Actions to target server
+      ansible.builtin.copy:
+        src: "{{DOCKERFILE_SRC}}"
+        dest: /opt/app/manage-api/.docker-compose
+        mode: "0644"
+
     - name: Run Docker Compose
       docker_compose:
-        project_src: "{{ ansible_env.docker_compose_path }}"
+        project_src: /opt/app/manage-api/.docker-compose
         state: present
         build: no
         pull: yes
