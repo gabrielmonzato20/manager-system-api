@@ -1,0 +1,13 @@
+version: '3'
+services:
+  placeholder:
+    image: nginx:alpine
+    networks:
+      shared-network:
+        aliases:
+          - java_app
+          - frontend
+
+networks:
+  shared-network:
+    external: true

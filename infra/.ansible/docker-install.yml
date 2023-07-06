@@ -61,13 +61,32 @@
         name: docker
         state: present
         executable: pip3
-  
+    - name: Create directory of Dockerfile
+      file:
+        path: /opt/app/manage-api/.docker-compose
+        state: directory
+        recurse: yes
+    - name: Create directory of network dockerfile
+      file:
+        path: /opt/app/manage-api/.docker-compose-net
+        state: directory
+        recurse: yes
     - name: Copy file from GitHub Actions to target server
       ansible.builtin.copy:
         src: "{{DOCKERFILE_SRC}}"
         dest: /opt/app/manage-api/.docker-compose
         mode: "0644"
-
+    - name: Copy file from GitHub Actions to target server
+      ansible.builtin.copy:
+        src: "{{DOCKERFILE_SRCi_NET}}"
+        dest: /opt/app/manage-api/.docker-compose-net
+        mode: "0644"
+    - name: Run Docker Compose Network
+      docker_compose:
+        project_src: /opt/app/manage-api/.docker-compose-net
+        state: present
+        build: no
+        pull: yes
     - name: Run Docker Compose
       docker_compose:
         project_src: /opt/app/manage-api/.docker-compose
