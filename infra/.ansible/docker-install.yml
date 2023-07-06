@@ -90,7 +90,7 @@
     - name: Create shared network
       docker_network:
         name: shared-network
-        state: presen
+        state: present
 
     - name: Run Docker Compose Network
       docker_compose:
