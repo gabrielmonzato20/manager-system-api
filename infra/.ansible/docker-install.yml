@@ -78,7 +78,7 @@
         mode: "0644"
     - name: Copy file from GitHub Actions to target server
       ansible.builtin.copy:
-        src: "{{DOCKERFILE_SRCi_NET}}"
+        src: "{{DOCKERFILE_SRC_NET}}"
         dest: /opt/app/manage-api/.docker-compose-net
         mode: "0644"
     - name: Run Docker Compose Network
