@@ -1,6 +1,6 @@
 version: '3'
 services:
-  java_app:
+  javaapp:
     image: ${DOCKER_IMAGE}
     ports:
       - 8080:8080
