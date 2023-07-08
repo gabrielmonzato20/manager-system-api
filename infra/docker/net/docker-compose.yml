@@ -5,7 +5,7 @@ services:
     networks:
       shared-network:
         aliases:
-          - java_app
+          - javaapp
           - frontend
 
 networks:
